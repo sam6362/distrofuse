@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.15)
 project(distfuse DESCRIPTION "DistFuse Universal Package Manager" LANGUAGES C)
 
+# Project Version
+set(DISTFUSE_VERSION "1.0.0")
+
 # Debug: Print current directory
 message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -9,7 +12,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -O2")
 
-# Check if directories exist
+# Check if directories exist and add them as subdirectories
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/UI")
     message(STATUS "UI directory found")
     add_subdirectory(UI)
@@ -33,6 +36,12 @@ add_subdirectory(package_manager)
 
 # Main executable file
 add_executable(distfuse main.c)
+
+# Derleme zamanında sürüm makrosunu tanımla
+# Bu satır 'add_executable' sonrasında yer almalı
+target_compile_definitions(distfuse PRIVATE
+    DISTFUSE_APP_VERSION="${DISTFUSE_VERSION}"
+)
 
 # Links - Make sure target names match exactly
 target_link_libraries(distfuse PRIVATE 
