@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "cli.h": "c",
+        "params.h": "c",
+        "string.h": "c",
+        "parser.h": "c",
+        "stdio.h": "c"
+    }
+}
