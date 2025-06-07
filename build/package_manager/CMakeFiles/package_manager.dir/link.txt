@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpackage_manager.a CMakeFiles/package_manager.dir/detector.c.o CMakeFiles/package_manager.dir/optimizer.c.o
-/usr/bin/ranlib libpackage_manager.a

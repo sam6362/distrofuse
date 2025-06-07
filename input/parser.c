@@ -66,7 +66,7 @@ int execute_package_command(const char* manager, const char* action, const char*
                     "%s remove -y %s > %s 2>&1", 
                     manager, package, temp_file);
         }
-    }
+    } 
     
     int result = system(command);
     
