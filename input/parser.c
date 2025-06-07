@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>    // For close() and unlink()
-#include <sys/stat.h>  // For mkstemp() (may be needed depending on system)
+#include <unistd.h>
+#include <sys/stat.h>
 
 #include "parser.h"
 #include "detector.h"
@@ -11,7 +11,6 @@
 
 char validcommands[] = "install, remove";
 
-// Silent execution function (inline for now)
 int execute_package_command(const char* manager, const char* action, const char* package) {
     char command[512];
     char temp_file[] = "/tmp/distfuse_output_XXXXXX";
@@ -23,7 +22,6 @@ int execute_package_command(const char* manager, const char* action, const char*
     }
     close(temp_fd);
     
-    // Build silent command
     if (strcmp(action, "install") == 0) {
         if (strcmp(manager, "apt") == 0) {
             snprintf(command, sizeof(command), 
@@ -70,10 +68,8 @@ int execute_package_command(const char* manager, const char* action, const char*
         }
     }
     
-    // Execute command
     int result = system(command);
     
-    // Check for common errors and provide user-friendly messages
     if (result != 0) {
         FILE* output_file = fopen(temp_file, "r");
         if (output_file) {
@@ -103,7 +99,6 @@ int execute_package_command(const char* manager, const char* action, const char*
         ui_show_success("Package operation completed successfully!");
     }
     
-    // Clean up
     unlink(temp_file);
     return result;
 }
@@ -115,26 +110,12 @@ int parse_arguments(int argc, char *argv[]) {
         return 1;
     }
 
-    char *command = argv[1];
+    char *subcommand_arg = argv[1];
+    char *packageName_arg = (argc > 2) ? argv[2] : NULL;
 
-    if (strcmp(command, "distfuse") == 0) {
-        if (argc < 3) {
-            printf("❌ Subcommand required for the 'distfuse' command.\n");
-            printf("💡 Usage: %s distfuse <subcommand> [args...]\n", argv[0]);
-            return 1;
-        }
-        
-        char *subcommand_arg = argv[2];
-        char *packageName_arg = (argc > 3) ? argv[3] : NULL;
-
-        if (subcommand_check(subcommand_arg, packageName_arg) != 0) {
-            printf("❌ Unidentified 'distfuse' subcommand or incomplete argument: %s\n", subcommand_arg);
-            printf("💡 Valid subcommands: %s\n", validcommands);
-            return 1;
-        }
-    } else {
-        printf("❌ Unidentified command: %s\n", command);
-        printf("💡 Valid commands: distfuse\n");
+    if (subcommand_check(subcommand_arg, packageName_arg) != 0) {
+        printf("❌ Unidentified subcommand or incomplete argument: %s\n", subcommand_arg);
+        printf("💡 Valid subcommands: %s\n", validcommands);
         return 1;
     }
 
@@ -148,7 +129,6 @@ int subcommand_check(char *subcommand, char *packageName) {
             return 1;
         }
         
-        // Initialize modern UI
         ui_set_package_status(packageName, "Detecting...");
         draw_ui();
         
@@ -167,23 +147,18 @@ int subcommand_check(char *subcommand, char *packageName) {
             return 1;
         }
         
-        // Update UI with found manager
         ui_set_package_status(packageName, best.manager_name);
         draw_ui();
         
         printf("🚀 Installing '%s' using %s (latency: %.2fms)\n", 
                packageName, best.manager_name, best.latency_ms);
         
-        // Show download progress animation
         ui_update_download_progress();
         
-        // Show install progress animation  
         ui_update_install_progress();
         
-        // Execute the actual command silently
         int result = execute_package_command(best.manager_name, "install", packageName);
         
-        // Finish UI
         ui_finish();
         
         return (result == 0) ? 0 : 1;
@@ -194,7 +169,6 @@ int subcommand_check(char *subcommand, char *packageName) {
             return 1;
         }
         
-        // Initialize modern UI
         ui_set_package_status(packageName, "Detecting...");
         draw_ui();
         
@@ -213,24 +187,20 @@ int subcommand_check(char *subcommand, char *packageName) {
             return 1;
         }
         
-        // Update UI with found manager
         ui_set_package_status(packageName, best.manager_name);
         draw_ui();
         
         printf("🗑️  Removing '%s' using %s\n", packageName, best.manager_name);
         
-        // Show removal progress
         ui_update_remove_progress();
         
-        // Execute the actual command silently
         int result = execute_package_command(best.manager_name, "remove", packageName);
         
-        // Finish UI
         ui_finish();
         
         return (result == 0) ? 0 : 1;
         
     } else {
-        return 1; // Unidentified subcommand
+        return 1;
     }
 }

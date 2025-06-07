@@ -1,1 +1,0 @@
-/usr/bin/cc -Wall -Wextra -Werror -O2 -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/distfuse.dir/link.d CMakeFiles/distfuse.dir/main.c.o -o distfuse  input/libinput_parser.a package_manager/libpackage_manager.a ui/libui.a utils/libutils.a ui/libui.a
