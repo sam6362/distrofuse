@@ -4,6 +4,7 @@
         "params.h": "c",
         "string.h": "c",
         "parser.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ui.h": "c"
     }
 }

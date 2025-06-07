@@ -1,29 +1,53 @@
 cmake_minimum_required(VERSION 3.15)
 project(distfuse DESCRIPTION "DistFuse Universal Package Manager" LANGUAGES C)
 
+# Debug: Print current directory
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+
 # Compiler Options
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -O2")
 
+# Check if directories exist
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/UI")
+    message(STATUS "UI directory found")
+    add_subdirectory(UI)
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ui")
+    message(STATUS "ui directory found")
+    add_subdirectory(ui)
+else()
+    message(FATAL_ERROR "UI directory not found!")
+endif()
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/utils")
+    message(STATUS "utils directory found")
+    add_subdirectory(utils)
+else()
+    message(FATAL_ERROR "utils directory not found!")
+endif()
+
 # Sub directories
 add_subdirectory(input)
-#add_subdirectory(UI)
 add_subdirectory(package_manager)
 
 # Main executable file
 add_executable(distfuse main.c)
 
-# Liks
+# Links - Make sure target names match exactly
 target_link_libraries(distfuse PRIVATE 
     input_parser
     package_manager
+    ui
+    utils
 )
 
 # Header files paths
 target_include_directories(distfuse PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/input
     ${CMAKE_CURRENT_SOURCE_DIR}/package_manager
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils
 )
 
 # Installation options
