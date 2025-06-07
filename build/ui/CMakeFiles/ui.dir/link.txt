@@ -1,0 +1,2 @@
+/usr/bin/ar qc libui.a CMakeFiles/ui.dir/ui.c.o
+/usr/bin/ranlib libui.a
